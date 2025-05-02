@@ -25,6 +25,8 @@ Response:
 {
   "message": "User registered successfully"
 }
+
+
 2. Login User
 URL: /api/auth/login
 
@@ -45,7 +47,10 @@ Response:
 {
   "token": "<JWT_TOKEN>"
 }
+
+
 🏨 Hotel Routes (Admin Only)
+
 3. Create Hotel
 URL: /api/hotels
 
@@ -60,6 +65,7 @@ Body:
   "location": "Delhi",
   "price_range": "3000-8000"
 }
+
 Response: Hotel created details.
 
 4. Update Hotel
