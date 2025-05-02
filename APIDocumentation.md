@@ -3,9 +3,6 @@ All API endpoints use https://your-domain.com/api/... or http://localhost:5000/a
 
 Authentication-protected routes require a JWT token in the header:
 
-makefile
-Copy
-Edit
 Authorization: Bearer <your_token>
 🧑 Auth Routes
 1. Register User
@@ -17,9 +14,6 @@ Access: Public
 
 Body:
 
-json
-Copy
-Edit
 {
   "name": "John Doe",
   "email": "john@example.com",
@@ -27,9 +21,7 @@ Edit
 }
 Response:
 
-json
-Copy
-Edit
+
 {
   "message": "User registered successfully"
 }
@@ -42,18 +34,14 @@ Access: Public
 
 Body:
 
-json
-Copy
-Edit
+
 {
   "email": "john@example.com",
   "password": "yourPassword"
 }
 Response:
 
-json
-Copy
-Edit
+
 {
   "token": "<JWT_TOKEN>"
 }
@@ -67,9 +55,6 @@ Access: Admin
 
 Body:
 
-json
-Copy
-Edit
 {
   "name": "Taj Palace",
   "location": "Delhi",
@@ -124,9 +109,6 @@ Access: Admin
 
 Body:
 
-json
-Copy
-Edit
 {
   "hotel_id": 1,
   "room_number": "101",
@@ -142,9 +124,6 @@ Access: User
 
 Body:
 
-json
-Copy
-Edit
 {
   "room_id": 1,
   "check_in": "2025-05-01",
