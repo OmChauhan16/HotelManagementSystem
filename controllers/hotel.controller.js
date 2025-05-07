@@ -1,12 +1,14 @@
 const db = require("../config/db");
 
 exports.createHotel = async (req, res) => {
-  const { name, location, description } = req.body;
+  const { name, location, description, price } = req.body;
+
   try {
-    await db.execute("INSERT INTO hotels (name, location, description) VALUES (?, ?, ?)", [
+    await db.execute("INSERT INTO hotels (name, location, description, price) VALUES (?, ?, ?, ?)", [
       name,
       location,
       description,
+      price
     ]);
     res.status(201).json({ message: "Hotel created" });
   } catch (err) {
@@ -16,14 +18,37 @@ exports.createHotel = async (req, res) => {
 
 exports.getAllHotels = async (req, res) => {
   try {
-    const [hotels] = await db.execute("SELECT * FROM hotels");
-    res.json(hotels);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    const { location, minPrice, maxPrice, check_in, check_out } = req.query;
+    let query = 'SELECT * FROM hotels WHERE 1=1';
+    const params = [];
+
+    if (location) {
+      query += ' AND location LIKE ?';
+      params.push(`%${location}%`);
+    }
+
+    if (minPrice) {
+      query += ' AND price >= ?';
+      params.push(minPrice);
+    }
+
+    if (maxPrice) {
+      query += ' AND price <= ?';
+      params.push(maxPrice);
+    }
+
+
+    const [hotels] = await db.query(query, params);
+    res.status(200).json(hotels);
+  } catch (error) {
+    console.error('Error fetching hotels:', error.message);
+    res.status(500).json({ error: 'Server error while retrieving hotels' });
   }
 };
 
 exports.updateHotel = async (req, res) => {
+  console.log(req.body);
+  
   const { name, location, description } = req.body;
   const { id } = req.params;
   try {

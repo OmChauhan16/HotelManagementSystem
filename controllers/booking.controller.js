@@ -1,7 +1,7 @@
 const db = require("../config/db");
 
 exports.createBooking = async (req, res) => {
-  const { room_id, start_date, end_date } = req.body;
+  const { room_id, start_date, end_date, check_in, check_out } = req.body;
   const user_id = req.user.id;
 
   try {
@@ -21,8 +21,8 @@ exports.createBooking = async (req, res) => {
     }
 
     await db.execute(
-      "INSERT INTO bookings (user_id, room_id, start_date, end_date) VALUES (?, ?, ?, ?)",
-      [user_id, room_id, start_date, end_date]
+      "INSERT INTO bookings (user_id, room_id, start_date, end_date, check_in, check_out) VALUES (?, ?, ?, ?, ?, ?)",
+      [user_id, room_id, start_date, end_date, check_in, check_out]
     );
 
     res.status(201).json({ message: "Room booked successfully" });

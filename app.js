@@ -1,6 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swagger'); // path to the swagger.js
+
 const authRoutes = require("./routes/auth.routes");
 const hotelRoutes = require("./routes/hotel.routes");
 const roomRoutes = require("./routes/room.routes");
@@ -19,3 +22,9 @@ app.use("/api/bookings", bookingRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+
+
+
+
